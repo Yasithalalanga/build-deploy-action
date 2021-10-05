@@ -9,8 +9,9 @@
   "author": "Achala Dias",
   "license": "ISC",
   "dependencies": {
-    "@actions/core": "^1.2.4",
+    "@actions/core": "^1.6.0",
     "@actions/github": "^4.0.0",
-    "axios": "^0.22.0"
+    "axios": "^0.22.0",
+    "node-fetch": "^3.0.0"
   }
 }
