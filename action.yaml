@@ -37,6 +37,14 @@ inputs:
     description: 'Secret token for validation'
     required: true
     default: ''
+  port-extract-file-path: 
+    description: 'Deploymnet yaml file path to extract ports'
+    required: true
+    default: 'target/kubernetes/workspace/workspace.yaml'
+  debug: 
+    description: 'Enable request debug'
+    required: false
+    default: false
 outputs:
   choreo-status:
     description: 'Status of the Webhook Call to choreo'

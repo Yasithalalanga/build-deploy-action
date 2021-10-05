@@ -1,21 +1,11 @@
 const axios = require('axios').default;
 const core = require('@actions/core');
 const github = require('@actions/github');
-const { exec } = require("child_process");
-
-exec("ls -la", (error, stdout, stderr) => {
-    if (error) {
-        console.log(`error: ${error.message}`);
-        return;
-    }
-    if (stderr) {
-        console.log(`stderr: ${stderr}`);
-        return;
-    }
-    console.log(`stdout: ${stdout}`);
-});
+const fs = require('fs');
+const yaml = require('js-yaml');
 
 try {
+    const extractedPorts = [];
     const domain = core.getInput('domain');
     const organizationId = core.getInput('org-id');
     const projectId = core.getInput('project-id');
@@ -25,18 +15,32 @@ try {
     const gitHash = core.getInput('git-hash');
     const token = core.getInput('token');
     const payload = github.context.payload;
+    const portExtractFilePath = core.getInput('port-extract-file-path');
 
-    console.log('payload:: ', payload);
-
-    // if (debug) {
-    //     console.log(`debug enabled...`);
-    // }
+    try {
+        let fileContents = fs.readFileSync(portExtractFilePath, 'utf8');
+        let data = yaml.loadAll(fileContents);
+    
+        for (const file of data) {
+            if(file.kind == 'Service') {
+                for (const port of file.spec.ports) {
+                    extractedPorts.push({
+                        port: port.port,
+                        name: port.name
+                    });
+                }
+            }
+        }
+    
+    } catch (e) {
+        console.log(e);
+    }
 
     console.log(`Sending Request to Choreo API....`);
     const body = {
         image: imageName,
         tag: gitHash,
-        image_ports: imageName,
+        image_ports: extractedPorts,
         git_hash: gitHash,
         organization_id: organizationId,
         project_id: projectId,
@@ -45,27 +49,20 @@ try {
         registry_token: token
     }
 
-    console.log('body:', body);
-
     let WebhhookURL;
-    if (containerID && containerID != "") {
-        body.container_id = containerID
-        WebhhookURL = `${domain}/rudder/webhook/v1/container`
+    if (body.registry_token && body.registry_token != "") {
+        WebhhookURL = `${domain}/image/deploy`
     }
-    if (imageRegistryID && imageRegistryID != "") {
-        body.image_registry_id = imageRegistryID
-        WebhhookURL = `${domain}/rudder/webhook/v1/image-registry`
-    }
-    const headers = {
-        'Content-Type': 'application/json',
-        'Authorization': token,
-        'x-project-id': projectId,
-        'x-organization-id': organizationId
-    }
+    /** not required any header for current implementation */
+    // const headers = {
+    //     'Content-Type': 'application/json',
+    //     'Authorization': token,
+    //     'x-project-id': projectId,
+    //     'x-organization-id': organizationId
+    // }
 
     if (debug) {
         console.log("request-body: ", JSON.stringify(body));
-        console.log("request-headers: ", JSON.stringify(headers));
     }
 
     console.log("sending request to " + WebhhookURL)
