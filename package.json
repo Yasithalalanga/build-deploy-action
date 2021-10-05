@@ -1,12 +1,12 @@
 {
-  "name": "platformer-action",
+  "name": "choreo-action",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Nilesh Jayanandana",
+  "author": "Achala Dias",
   "license": "ISC",
   "dependencies": {
     "@actions/core": "^1.2.4",
