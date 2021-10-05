@@ -3,7 +3,7 @@ description: 'Deploy newly built docker images to kubernetes through the Choreo 
 author: WSO2
 branding:
   icon: 'arrow-up-circle'
-  color: 'oragne'
+  color: 'orange'
 inputs:
   domain:
     description: 'Choreo API Domain.'
