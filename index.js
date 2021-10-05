@@ -69,9 +69,7 @@ try {
     console.log("sending request to " + WebhhookURL)
 
 
-    axios.post(WebhhookURL, body, {
-        headers: headers
-    }).then(function (response) {
+    axios.post(WebhhookURL, body).then(function (response) {
         core.setOutput("choreo-status", "deployed");
     }).catch(function (error) {
         core.setOutput("choreo-status", "failed");
