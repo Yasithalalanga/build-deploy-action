@@ -4,20 +4,6 @@ const github = require('@actions/github');
 const fs = require('fs');
 const yaml = require('js-yaml');
 
-// const { exec } = require("child_process");
-
-// exec("ls -la", (error, stdout, stderr) => {
-//     if (error) {
-//         console.log(`error: ${error.message}`);
-//         return;
-//     }
-//     if (stderr) {
-//         console.log(`stderr: ${stderr}`);
-//         return;
-//     }
-//     console.log(`stdout: ${stdout}`);
-// });
-
 try {
     const extractedPorts = [];
     const domain = core.getInput('domain');
