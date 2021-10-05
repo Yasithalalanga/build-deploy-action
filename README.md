@@ -38,6 +38,10 @@ Last commit hash.
 
 **Required** choreo Service Account Token to be used for this action. Please use Secrets for this.
 
+### `port-extract-file-path`
+
+**Required** file path where deployment ports need to be extracted
+
 
 ## Example
 
@@ -55,4 +59,5 @@ Last commit hash.
        tag: ${{github.sha}}
        container-id: some-container-id
        env-id: ${{secrets.ENV_ID}}
+       port-extract-file-path: 'path to file'
 ```
