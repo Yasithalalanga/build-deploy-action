@@ -12,6 +12,9 @@ choreo API Domain. Default.
 
 **Required** choreo Organization ID 
 
+### `app-id`
+
+**Required** choreo App/Component ID 
 
 ### `project-id`
 
@@ -58,5 +61,6 @@ Last commit hash.
        image-name: ${{secrets.DOCKER_USER}}/${{ github.event.repository.name }} 
        git-hash: ${{github.sha}}
        env-id: ${{secrets.ENV_ID}}
+       app-id: ${{secrets.APP_ID}}
        port-extract-file-path: 'path to file'
 ```
