@@ -71,14 +71,19 @@ try {
 
     axios.post(WebhhookURL, body).then(function (response) {
         core.setOutput("choreo-status", "deployed");
+        console.log("choreo-status", "deployed");
     }).catch(function (error) {
         core.setOutput("choreo-status", "failed");
         core.setFailed(error.message);
+        console.log("choreo-status", "failed");
+        console.log(error.message);
     });
 
 } catch (error) {
     core.setOutput("choreo-status", "failed");
     core.setFailed(error.message);
+    console.log("choreo-status", "failed");
+    console.log(error.message);
 }
 
 
