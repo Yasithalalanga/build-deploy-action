@@ -56,8 +56,7 @@ Last commit hash.
        project-id: ${{secrets.PROJECT_ID}}
        token: ${{secrets.TOKEN}}
        image-name: ${{secrets.DOCKER_USER}}/${{ github.event.repository.name }} 
-       tag: ${{github.sha}}
-       container-id: some-container-id
+       git-hash: ${{github.sha}}
        env-id: ${{secrets.ENV_ID}}
        port-extract-file-path: 'path to file'
 ```
