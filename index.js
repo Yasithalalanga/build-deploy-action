@@ -33,10 +33,6 @@ try {
                 }
             }
         }
-
-        const bitmap = fs.readFileSync(portExtractFilePath);
-        workspaceEncordedFile = new Buffer.from(bitmap).toString('base64');
-
     } catch (e) {
         console.log(e);
     }
@@ -52,7 +48,7 @@ try {
         app_id: appId,
         environment_id: envId,
         registry_token: token,
-        workspace_yaml: workspaceEncordedFile
+        workspace_yaml_path: portExtractFilePath
     }
 
     let WebhhookURL;
