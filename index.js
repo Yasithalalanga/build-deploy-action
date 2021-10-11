@@ -6,6 +6,7 @@ const yaml = require('js-yaml');
 
 try {
     const extractedPorts = [];
+    const workspaceEncordedFile = '';
     const domain = core.getInput('domain');
     const organizationId = core.getInput('org-id');
     const projectId = core.getInput('project-id');
@@ -21,9 +22,9 @@ try {
     try {
         let fileContents = fs.readFileSync(portExtractFilePath, 'utf8');
         let data = yaml.loadAll(fileContents);
-    
+
         for (const file of data) {
-            if(file.kind == 'Service') {
+            if (file.kind == 'Service') {
                 for (const port of file.spec.ports) {
                     extractedPorts.push({
                         port: port.port,
@@ -32,7 +33,10 @@ try {
                 }
             }
         }
-    
+
+        const bitmap = fs.readFileSync(portExtractFilePath);
+        workspaceEncordedFile = new Buffer.from(bitmap).toString('base64');
+
     } catch (e) {
         console.log(e);
     }
@@ -47,7 +51,8 @@ try {
         project_id: projectId,
         app_id: appId,
         environment_id: envId,
-        registry_token: token
+        registry_token: token,
+        workspace_yaml: workspaceEncordedFile
     }
 
     let WebhhookURL;
