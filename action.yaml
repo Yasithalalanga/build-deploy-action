@@ -33,6 +33,10 @@ inputs:
     description: 'Name of the built tag'
     required: true
     default: 'latest'
+  gitops-hash: 
+    description: 'Name of the built tag of gitops repo'
+    required: true
+    default: 'latest'
   token: 
     description: 'Secret token for validation'
     required: true

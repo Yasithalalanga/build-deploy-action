@@ -14,6 +14,7 @@ try {
     const envId = core.getInput('env-id');
     const imageName = core.getInput('image-name');
     const gitHash = core.getInput('git-hash');
+    const gitOpsHash = core.getInput('gitops-hash');
     const token = core.getInput('token');
     const debug = core.getInput('debug');
     const payload = github.context.payload;
@@ -43,6 +44,7 @@ try {
         tag: gitHash,
         image_ports: extractedPorts,
         git_hash: gitHash,
+        gitops_hash: gitOpsHash,
         organization_id: organizationId,
         project_id: projectId,
         app_id: appId,
