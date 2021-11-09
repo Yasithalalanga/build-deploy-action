@@ -77,19 +77,19 @@ try {
         console.log("choreo-status", "deployed");
     }).catch(function (error) {
         core.setOutput("choreo-status", "failed");
-        core.setFailed(error.message);
+//         core.setFailed(error.message);
         core.setFailed(error);
         console.log("choreo-status", "failed");
-        console.log(error.message);
+//         console.log(error.message);
         console.log(error);
     });
 
 } catch (error) {
     core.setOutput("choreo-status", "failed");
-    core.setFailed(error.message);
+//     core.setFailed(error.message);
     core.setFailed(error);
     console.log("choreo-status", "failed");
-    console.log(error.message);
+//     console.log(error.message);
     console.log(error);
 }
 
