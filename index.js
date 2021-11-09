@@ -76,21 +76,43 @@ try {
         core.setOutput("choreo-status", "deployed");
         console.log("choreo-status", "deployed");
     }).catch(function (error) {
-        core.setOutput("choreo-status", "failed");
-//         core.setFailed(error.message);
-        core.setFailed(error);
-        console.log("choreo-status", "failed");
-//         console.log(error.message);
-        console.log(error);
+//         core.setOutput("choreo-status", "failed");
+// //         core.setFailed(error.message);
+//         core.setFailed(error);
+//         console.log("choreo-status", "failed");
+// //         console.log(error.message);
+//         console.log(error);
+        
+        
+        if (error.response) {
+      console.log(error.response.data);
+      console.log(error.response.status);
+      console.log(error.response.headers);
+    } else if (error.request) {
+      console.log(error.request);
+    } else {
+      console.log('Error', error.message);
+    }
     });
 
 } catch (error) {
-    core.setOutput("choreo-status", "failed");
-//     core.setFailed(error.message);
-    core.setFailed(error);
-    console.log("choreo-status", "failed");
-//     console.log(error.message);
-    console.log(error);
+//     core.setOutput("choreo-status", "failed");
+// //     core.setFailed(error.message);
+//     core.setFailed(error);
+//     console.log("choreo-status", "failed");
+// //     console.log(error.message);
+//     console.log(error);
+    
+     if (error.response) {
+      console.log(error.response.data);
+      console.log(error.response.status);
+      console.log(error.response.headers);
+    } else if (error.request) {
+      console.log(error.request);
+    } else {
+      console.log('Error', error.message);
+    }
+    
 }
 
 
