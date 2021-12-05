@@ -25,6 +25,14 @@ inputs:
     description: 'Environment ID'
     required: true
     default: ''
+  version:
+    description: 'Version ID'
+    required: true
+    default: ''
+  branch:
+    description: 'Branch'
+    required: false
+    default: 'main'
   image-name: 
     description: 'Name of the image'
     required: true
