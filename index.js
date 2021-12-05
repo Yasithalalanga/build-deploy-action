@@ -12,6 +12,7 @@ try {
     const projectId = core.getInput('project-id');
     const appId = core.getInput('app-id');
     const envId = core.getInput('env-id');
+    const api_version_id = core.getInput('version');
     const imageName = core.getInput('image-name');
     const gitHash = core.getInput('git-hash');
     const gitOpsHash = core.getInput('gitops-hash');
@@ -48,6 +49,7 @@ try {
         organization_id: organizationId,
         project_id: projectId,
         app_id: appId,
+        api_version_id: api_version_id,
         environment_id: envId,
         registry_token: token,
         workspace_yaml_path: portExtractFilePath
