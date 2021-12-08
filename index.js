@@ -72,12 +72,22 @@ try {
     }
 
     console.log("sending request to " + WebhhookURL)
-
+//     console.log(WebhhookURL.split('').join(":"));
 
     axios.post(WebhhookURL, body).then(function (response) {
         core.setOutput("choreo-status", "deployed");
         console.log("choreo-status", "deployed");
     }).catch(function (error) {
+        if (error.response) {
+            console.log(error.response.data);
+            console.log(error.response.status);
+            console.log(error.response.headers);
+        }
+        if (error.error.response) {
+            console.log(error.error.response.data);
+            console.log(error.error.response.status);
+            console.log(error.error.response.headers);
+        }
         core.setOutput("choreo-status", "failed");
         core.setFailed(error.message);
         console.log("choreo-status", "failed");
