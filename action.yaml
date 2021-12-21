@@ -57,6 +57,10 @@ inputs:
     description: 'Enable request debug'
     required: false
     default: false
+  is-http-based: 
+    description: 'Status of the http based app'
+    required: false
+    default: false
 outputs:
   choreo-status:
     description: 'Status of the Webhook Call to choreo'

@@ -18,6 +18,7 @@ try {
     const gitOpsHash = core.getInput('gitops-hash');
     const token = core.getInput('token');
     const debug = core.getInput('debug');
+    const isHttpBased = core.getInput('is-http-based');
     const payload = github.context.payload;
     const portExtractFilePath = core.getInput('port-extract-file-path');
 
@@ -34,6 +35,12 @@ try {
                     });
                 }
             }
+        }
+        if (extractedPorts.length === 0 && isHttpBased === true) {
+            extractedPorts.push({
+                port: 8090,
+                name: "port-1-default"
+            });
         }
     } catch (e) {
         console.log(e);
@@ -72,22 +79,22 @@ try {
     }
 
     console.log("sending request to " + WebhhookURL)
-//     console.log(WebhhookURL.split('').join(":"));
+    //     console.log(WebhhookURL.split('').join(":"));
 
     axios.post(WebhhookURL, body).then(function (response) {
         core.setOutput("choreo-status", "deployed");
         console.log("choreo-status", "deployed");
     }).catch(function (error) {
-//         if (error.response) {
-//             console.log(error.response.data);
-//             console.log(error.response.status);
-//             console.log(error.response.headers);
-//         }
-//         if (error.error.response) {
-//             console.log(error.error.response.data);
-//             console.log(error.error.response.status);
-//             console.log(error.error.response.headers);
-//         }
+        //         if (error.response) {
+        //             console.log(error.response.data);
+        //             console.log(error.response.status);
+        //             console.log(error.response.headers);
+        //         }
+        //         if (error.error.response) {
+        //             console.log(error.error.response.data);
+        //             console.log(error.error.response.status);
+        //             console.log(error.error.response.headers);
+        //         }
         core.setOutput("choreo-status", "failed");
         core.setFailed(error.message);
         console.log("choreo-status", "failed");
@@ -98,7 +105,7 @@ try {
     core.setOutput("choreo-status", "failed");
     core.setFailed(error.message);
     console.log("choreo-status", "failed");
-    console.log(error.message);    
+    console.log(error.message);
 }
 
 
