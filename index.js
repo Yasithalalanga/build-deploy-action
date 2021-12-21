@@ -36,12 +36,14 @@ try {
                 }
             }
         }
-        if (extractedPorts.length === 0 && isHttpBased === true) {
+        console.log("BEFOR :: ", extractedPorts);
+        if (extractedPorts.length === 0 && isHttpBased) {
             extractedPorts.push({
                 port: 8090,
                 name: "port-1-default"
             });
         }
+        console.log("AFTER :: ", extractedPorts);
     } catch (e) {
         console.log(e);
     }
