@@ -66,35 +66,14 @@ try {
     if (body.registry_token && body.registry_token != "") {
         WebhhookURL = `${domain}/image/deploy`
     }
-    /** not required any header for current implementation */
-    // const headers = {
-    //     'Content-Type': 'application/json',
-    //     'Authorization': token,
-    //     'x-project-id': projectId,
-    //     'x-organization-id': organizationId
-    // }
-
     if (debug) {
         console.log("request-body: ", JSON.stringify(body));
     }
-
-    console.log("sending request to " + WebhhookURL)
-    //     console.log(WebhhookURL.split('').join(":"));
 
     axios.post(WebhhookURL, body).then(function (response) {
         core.setOutput("choreo-status", "deployed");
         console.log("choreo-status", "deployed");
     }).catch(function (error) {
-        //         if (error.response) {
-        //             console.log(error.response.data);
-        //             console.log(error.response.status);
-        //             console.log(error.response.headers);
-        //         }
-        //         if (error.error.response) {
-        //             console.log(error.error.response.data);
-        //             console.log(error.error.response.status);
-        //             console.log(error.error.response.headers);
-        //         }
         core.setOutput("choreo-status", "failed");
         core.setFailed(error.message);
         console.log("choreo-status", "failed");
