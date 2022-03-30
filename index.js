@@ -74,10 +74,22 @@ try {
         core.setOutput("choreo-status", "deployed");
         console.log("choreo-status", "deployed");
     }).catch(function (error) {
-        core.setOutput("choreo-status", "failed");
-        core.setFailed(error.message);
-        console.log("choreo-status", "failed");
-        console.log(error.message);
+        if (error.response) {
+            // Request made and server responded
+            core.setOutput(error.response.data);
+            core.setOutput(error.response.status);
+//             console.log(error.response.data);
+//             console.log(error.response.status);
+        } else if (error.request) {
+            // The request was made but no response was received
+            core.setOutput(error.request);
+            console.log(error.request);
+        } else {
+            // Something happened in setting up the request that triggered an Error
+            console.log('Error', error.message);
+            core.setOutput("choreo-status", "failed");
+            core.setFailed(error.message);
+        }
     });
 
 } catch (error) {
