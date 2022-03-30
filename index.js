@@ -75,18 +75,11 @@ try {
         console.log("choreo-status", "deployed");
     }).catch(function (error) {
         if (error.response) {
-            // Request made and server responded
-//             core.setOutput(error.response.data);
-//             core.setOutput(error.response.status);
             core.setFailed(error.response.data);
-            console.log(error.response.data);
             console.log(error.response.status);
         } else if (error.request) {
-            // The request was made but no response was received
-//             core.setOutput(error.request);
             console.log(error.request);
         } else {
-            // Something happened in setting up the request that triggered an Error
             console.log('Error', error.message);
             core.setOutput("choreo-status", "failed");
             core.setFailed(error.message);
