@@ -9,7 +9,7 @@
   "author": "Achala Dias",
   "license": "ISC",
   "dependencies": {
-    "@actions/core": "^1.6.0",
+    "@actions/core": "^1.9.1",
     "@actions/github": "^4.0.0",
     "axios": "^0.27.2",
     "js-yaml": "^4.1.0"
