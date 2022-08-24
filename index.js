@@ -19,6 +19,7 @@ try {
     const token = core.getInput('token');
     const debug = core.getInput('debug');
     const isHttpBased = core.getInput('is-http-based');
+    const oasFilePath = core.getInput('oas-file-path');
     const payload = github.context.payload;
     const portExtractFilePath = core.getInput('port-extract-file-path');
 
@@ -59,7 +60,8 @@ try {
         api_version_id: api_version_id,
         environment_id: envId,
         registry_token: token,
-        workspace_yaml_path: portExtractFilePath
+        workspace_yaml_path: portExtractFilePath,
+        oasFilePath: oasFilePath
     }
 
     let WebhhookURL;
