@@ -61,6 +61,10 @@ inputs:
     description: 'Status of the http based app'
     required: false
     default: false
+  oas-file-path: 
+    description: 'Oas file path'
+    required: false
+    default: ''
 outputs:
   choreo-status:
     description: 'Status of the Webhook Call to choreo'
