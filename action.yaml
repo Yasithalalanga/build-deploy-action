@@ -1,73 +1,85 @@
-name: 'Choreo Deployer'
-description: 'Deploy newly built docker images to kubernetes through the Choreo API'
+name: "Choreo Deployer"
+description: "Deploy newly built docker images to kubernetes through the Choreo API"
 author: WSO2
 branding:
-  icon: 'arrow-up-circle'
-  color: 'orange'
+  icon: "arrow-up-circle"
+  color: "orange"
 inputs:
   domain:
-    description: 'Choreo API Domain.'
+    description: "Choreo API Domain."
     required: false
-    default: ''
+    default: ""
   org-id:
-    description: 'Organization ID'
+    description: "Organization ID"
     required: true
-    default: 0
+    default: "0"
   project-id:
-    description: 'Project ID'
+    description: "Project ID"
     required: true
-    default: ''
+    default: ""
   app-id:
-    description: 'App ID'
+    description: "App ID"
     required: true
-    default: ''
+    default: ""
   env-id:
-    description: 'Environment ID'
+    description: "Environment ID"
     required: true
-    default: ''
+    default: ""
   version:
-    description: 'Version ID'
+    description: "Version ID"
     required: true
-    default: ''
+    default: ""
   branch:
-    description: 'Branch'
+    description: "Branch"
     required: false
-    default: 'main'
+    default: :"main"
   image-name: 
-    description: 'Name of the image'
+    description: "Name of the image"
     required: true
-    default: ''
+    default: ""
+  git-hash-date:
+    description: "Date of the built tag"
+    required: false
+    default: ""
   git-hash: 
-    description: 'Name of the built tag'
+    description: "Name of the built tag"
     required: true
     default: 'latest'
   gitops-hash: 
     description: 'Name of the built tag of gitops repo'
     required: true
-    default: 'latest'
+    default: "latest"
   token: 
     description: 'Secret token for validation'
     required: true
-    default: ''
+    default: ""
   port-extract-file-path: 
-    description: 'Deploymnet yaml file path to extract ports'
+    description: "Deploymnet yaml file path to extract ports"
     required: true
-    default: 'target/kubernetes/workspace/workspace.yaml'
+    default: "target/kubernetes/workspace/workspace.yaml"
   debug: 
-    description: 'Enable request debug'
+    description: "Enable request debug"
     required: false
-    default: false
+    default: "false"
   is-http-based: 
-    description: 'Status of the http based app'
+    description: "Status of the http based app"
     required: false
-    default: false
+    default: ""
+  container-id: 
+    description: "Container Id"
+    required: false
+    default: "N/A"
+  is-container-deployment: 
+    description: "Check container deployment"
+    required: false
+    default: ""
   oas-file-path: 
-    description: 'Oas file path'
+    description: "Oas file path"
     required: false
-    default: ''
+    default: ""
 outputs:
   choreo-status:
-    description: 'Status of the Webhook Call to choreo'
+    description: "Status of the Webhook Call to choreo"
 runs:
-  using: 'node12'
-  main: 'index.js'
+  using: "node16"
+  main: "dist/index.js"

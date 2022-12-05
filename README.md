@@ -2,50 +2,6 @@
 
 This action deploys your newly built docker images to Kubernetes clusters through Choreo API
 
-## Inputs
-
-### `domain`
-
-choreo API Domain. Default.
-
-### `org-id`
-
-**Required** choreo Organization ID 
-
-### `app-id`
-
-**Required** choreo App/Component ID 
-
-### `project-id`
-
-**Required** choreo Project ID 
-
-
-### `image-name`
-
-**Required** Name of your Docker Image
-
-### `tag`
-
-**Required** Tag of your newly built image. (If you have multiple tags, just add one of them as all of them refer to the same image blob) Default `"latest"`
-
-### `env-id`
-
-Application Environment ID of choreo component.
-
-### `git-hash`
-
-Last commit hash.
-
-### `Token`
-
-**Required** choreo Service Account Token to be used for this action. Please use Secrets for this.
-
-### `port-extract-file-path`
-
-**Required** file path where deployment ports need to be extracted
-
-
 ## Example
 
 ```
@@ -54,13 +10,19 @@ Last commit hash.
     - name: choreo Deploy
       uses: choreo-templates/build-deploy-action@v1
       with:
-       domain: ${{secrets.DOMAIN}}
-       org-id: ${{secrets.ORG_ID}}
-       project-id: ${{secrets.PROJECT_ID}}
-       token: ${{secrets.TOKEN}}
-       image-name: ${{secrets.DOCKER_USER}}/${{ github.event.repository.name }} 
-       git-hash: ${{github.sha}}
-       env-id: ${{secrets.ENV_ID}}
-       app-id: ${{secrets.APP_ID}}
-       port-extract-file-path: 'path to file'
+        domain: ${{ env.RUDDER_WEBHOOK_URL }}
+        org-id: ${{ env.CHOREO_ORG_ID }}
+        project-id: ${{ env.CHOREO_PROJECT_ID }}
+        token: ${{ env.RUDDER_WEBHOOK_SECRET }}
+        image-name: ${{ env.CHOREO_GITOPS_REPO }}
+        git-hash: ${{ env.NEW_SHA }}
+        git-hash-date: ${{ github.event.inputs.shaDate }}
+        gitops-hash: ${{ env.NEW_GITOPS_SHA }}
+        app-id: ${{ env.APP_ID }}
+        env-id: ${{ github.event.inputs.envId }}
+        version: ${{ github.event.inputs.versionId }}
+        branch: ${{ github.event.inputs.branch }}
+        port-extract-file-path: target/kubernetes/${{ env.WORKSPACE }}/${{ env.WORKSPACE }}.yaml
+        is-http-based: true 
+        is-container-deployment: true | false
 ```
