@@ -31,11 +31,10 @@ try {
 
     const choreoApp = process.env.CHOREO_GITOPS_REPO;
     let cluster_image_tags = [];
-    let portExtractFilePath = getPreparedPath(portExtractFilePath);
-    console.log(portExtractFilePath);
+    const preparedPortExtractFilePath = getPreparedPath(portExtractFilePath);
     if (!isContainerDeployment) {
         try {
-            let fileContents = fs.readFileSync(portExtractFilePath, 'utf8');
+            let fileContents = fs.readFileSync(preparedPortExtractFilePath, 'utf8');
             let data = yaml.loadAll(fileContents);
 
             for (const file of data) {
@@ -99,7 +98,7 @@ try {
         api_version_id: api_version_id,
         environment_id: envId,
         registry_token: token,
-        workspace_yaml_path: portExtractFilePath,
+        workspace_yaml_path: preparedPortExtractFilePath,
         cluster_image_tags,
         git_hash_commit_timestamp: gitHashDate,
     };
