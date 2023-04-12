@@ -3,6 +3,12 @@ const core = require('@actions/core');
 const fs = require('fs');
 const yaml = require('js-yaml');
 
+function getPreparedPath(path) {
+    var seperatedPaths = path.split("/");
+    seperatedPaths[seperatedPaths.length - 1] = seperatedPaths[seperatedPaths.length - 1].toLocaleLowerCase();
+    return seperatedPaths.join("/");
+}
+
 try {
     const extractedPorts = [];
     const domain = core.getInput('domain');
@@ -27,7 +33,7 @@ try {
     let cluster_image_tags = [];
     if (!isContainerDeployment) {
         try {
-            let fileContents = fs.readFileSync(portExtractFilePath, 'utf8');
+            let fileContents = fs.readFileSync(getPreparedPath(portExtractFilePath), 'utf8');
             let data = yaml.loadAll(fileContents);
 
             for (const file of data) {
