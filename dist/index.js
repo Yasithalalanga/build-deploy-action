@@ -11955,10 +11955,17 @@ try {
 
     const choreoApp = process.env.CHOREO_GITOPS_REPO;
     let cluster_image_tags = [];
-    const preparedPortExtractFilePath = getPreparedPath(portExtractFilePath);
+    let preparedPortExtractFilePath = getPreparedPath(portExtractFilePath);
     if (!isContainerDeployment) {
         try {
-            let fileContents = fs.readFileSync(preparedPortExtractFilePath, 'utf8');
+            let fileContents = "";
+            try {
+                fileContents = fs.readFileSync(portExtractFilePath, 'utf8');
+                preparedPortExtractFilePath = portExtractFilePath;
+            } catch (error) {
+                console.log("Checking other file format path: ", preparedPortExtractFilePath);
+                fileContents = fs.readFileSync(preparedPortExtractFilePath, 'utf8');
+            }
             let data = yaml.loadAll(fileContents);
 
             for (const file of data) {
