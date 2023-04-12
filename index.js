@@ -3,6 +3,12 @@ const core = require('@actions/core');
 const fs = require('fs');
 const yaml = require('js-yaml');
 
+function getPreparedPath(path) {
+    var seperatedPaths = path.split("/");
+    seperatedPaths[seperatedPaths.length - 1] = seperatedPaths[seperatedPaths.length - 1].toLocaleLowerCase();
+    return seperatedPaths.join("/");
+}
+
 try {
     const extractedPorts = [];
     const domain = core.getInput('domain');
@@ -25,9 +31,10 @@ try {
 
     const choreoApp = process.env.CHOREO_GITOPS_REPO;
     let cluster_image_tags = [];
+    const preparedPortExtractFilePath = getPreparedPath(portExtractFilePath);
     if (!isContainerDeployment) {
         try {
-            let fileContents = fs.readFileSync(portExtractFilePath, 'utf8');
+            let fileContents = fs.readFileSync(preparedPortExtractFilePath, 'utf8');
             let data = yaml.loadAll(fileContents);
 
             for (const file of data) {
@@ -91,7 +98,7 @@ try {
         api_version_id: api_version_id,
         environment_id: envId,
         registry_token: token,
-        workspace_yaml_path: portExtractFilePath,
+        workspace_yaml_path: preparedPortExtractFilePath,
         cluster_image_tags,
         git_hash_commit_timestamp: gitHashDate,
     };
