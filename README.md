@@ -25,4 +25,5 @@ This action deploys your newly built docker images to Kubernetes clusters throug
         port-extract-file-path: target/kubernetes/${{ env.WORKSPACE }}/${{ env.WORKSPACE }}.yaml
         is-http-based: true 
         is-container-deployment: true | false
+        is-auto-deploy: true | false
 ```

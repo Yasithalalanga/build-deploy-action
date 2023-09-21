@@ -77,6 +77,10 @@ inputs:
     description: "Oas file path"
     required: false
     default: ""
+  is-auto-deploy: 
+    description: "Service auto deploy status"
+    required: false
+    default: ""
 outputs:
   choreo-status:
     description: "Status of the Webhook Call to choreo"
