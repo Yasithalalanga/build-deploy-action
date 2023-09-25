@@ -28,6 +28,7 @@ try {
     const isContainerDeployment = core.getInput('is-container-deployment');
     const oasFilePath = core.getInput('oas-file-path');
     const gitHashDate = core.getInput('git-hash-date');
+    const isAutoDeploy = core.getInput('is-auto-deploy');
 
     const choreoApp = process.env.CHOREO_GITOPS_REPO;
     let cluster_image_tags = [];
@@ -93,6 +94,7 @@ try {
         api_definition_path: oasFilePath,
         cluster_image_tags,
         git_hash_commit_timestamp: gitHashDate,
+        is_auto_deploy: isAutoDeploy
     } : {
         image: imageName,
         tag: gitHash,
@@ -108,6 +110,7 @@ try {
         workspace_yaml_path: preparedPortExtractFilePath,
         cluster_image_tags,
         git_hash_commit_timestamp: gitHashDate,
+        is_auto_deploy: isAutoDeploy
     };
 
     let WebhhookURL;
