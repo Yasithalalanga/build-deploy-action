@@ -28,7 +28,7 @@ try {
     const isContainerDeployment = core.getInput('is-container-deployment');
     const oasFilePath = core.getInput('oas-file-path');
     const gitHashDate = core.getInput('git-hash-date');
-    const isAutoDeploy = core.getInput('is-auto-deploy');
+    const isAutoDeploy = core.getInput('is-auto-deploy') === 'true';
 
     const choreoApp = process.env.CHOREO_GITOPS_REPO;
     let cluster_image_tags = [];
